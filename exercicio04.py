@@ -1,8 +1,18 @@
-veiculo= "moto"", ""bike"", ""carro"
-distancia= float(input("Digite a distância em km:"))
-calcularcusto = distancia / veiculo
-carro= 0.50
+print("informe qual o veiculo dentre as opcoes vc pode escolher carro, moto e bike")
 
-(int(input)("qual veiculo vc vai usar para a viagem"))
-(int(input)("qual a distancia?"))
-if veiculo  == int(calcularcusto * 0.50)
+distancia= float(input("qual a distancia para o destino"))
+veiculo= str(input("moto, bike e carro escolha apenas um veiculo"))
+
+if veiculo == "moto":
+    custo= distancia * 0.20
+    print("o valor é:",custo)
+
+elif veiculo == "carro":
+    custo= distancia * 0.50
+    print("o valor é:",custo)
+
+elif veiculo == "bike":
+    custo= distancia * 0.50
+    print("o valor é:",custo)
+
+

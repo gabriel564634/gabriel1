@@ -1,28 +1,29 @@
+import pandas as pd
+
 
 dados = {
-    'mes' : ['Janeiro', 'Janeiro', 'Janeiro', 'Fevereiro', 'Fevereiro'],
-    'Produtos' : ['camiseta',  'tenis', 'bota', 'camiseta', 'calça'],
-    'Quantidade' : [40,70,60,50,80]
-    
+    'Produto': ['Camiseta', 'Calça', 'Sapato', 'Camiseta', 'Calça'],
+    'Mês': ['Janeiro', 'Janeiro', 'Janeiro', 'Fevereiro', 'Fevereiro'],
+    'Vendas': [100, 150, 200, 120, 180]
 }
 
 df = pd.DataFrame(dados)
-v_janeiro = df[df['mes'] == 'Janeiro']
-pmv_janeiro = v_janeiro['Quantidade'].idxmax()
-p_janeiro = df.loc[pmv_janeiro, 'Produtos']
-procentagem_janeiro = df.loc[pmv_janeiro, 'Quantidade'] / v_janeiro['Quantidade'].sum() * 100
 
-print(f"\nProduto mais vendido em janeiro: ", p_janeiro, "com ", procentagem_janeiro, "% das vendas\n")
+vendas_janeiro = df[df['Mês'] == 'Janeiro']
+produto_mais_vendido_janeiro = vendas_janeiro['Vendas'].idxmax()
+produto_janeiro = df.loc[produto_mais_vendido_janeiro, 'Produto']
+porcentagem_janeiro = df.loc[produto_mais_vendido_janeiro, 'Vendas'] / vendas_janeiro['Vendas'].sum() * 100
 
-vc_janeiro = df[(df['Produtos'] == 'camiseta') & (df['mes'] == 'Janeiro')]['Quantidade'].values[0]
-vc_fervereiro = df[(df['Produtos'] == 'camiseta') & (df['mes'] == 'Fevereiro')]['Quantidade'].values[0]
+print(f"\nProduto mais vendido em janeiro: {produto_janeiro} com {porcentagem_janeiro:.2f}% das vendas")
 
-aumento_percentual = ((vc_fervereiro - vc_janeiro) / vc_janeiro) * 100
+vendas_camisetas_janeiro = df[(df['Produto'] == 'Camiseta') & (df['Mês'] == 'Janeiro')]['Vendas'].values[0]
+vendas_camisetas_fevereiro = df[(df['Produto'] == 'Camiseta') & (df['Mês'] == 'Fevereiro')]['Vendas'].values[0]
 
-print("\nAumento percentual nas vendas de camisetas de janeiro para fevereiro: ", aumento_percentual, "%\n")
+aumento_percentual = ((vendas_camisetas_fevereiro - vendas_camisetas_janeiro) / vendas_camisetas_janeiro) * 100
 
-pmv_geral= df.groupby('produto')['Quantidade'].sum().idxmax()
-tv_geral = df.groupby('Produto')['Quantidade'].sum().max()
+print(f"\nAumento percentual nas vendas de camisetas de janeiro para fevereiro: {aumento_percentual:.2f}%\n")
 
-print(f"\nProduto mais vendido em geral: ", {tv_geral}, "com ", pmv_geral, "% das vendas\n")
-    print(dado[0],dado[1],dado[2])
+produto_mais_vendido_geral = df.groupby('Produto')['Vendas'].sum().idxmax()
+total_vendas_mais_vendido_geral = df.groupby('Produto')['Vendas'].sum().max()
+
+print(f"\nProduto mais vendido no geral: {produto_mais_vendido_geral} com {total_vendas_mais_vendido_geral} vendas no total\n")

@@ -1,0 +1,57 @@
+conta = {
+    '1234': 1250.0,
+    '321': 1200.0,
+}
+
+# Funcao2
+senha = input("digite sua senha: ")
+
+def autenticar(senha):
+    if senha in conta:
+        print("acesso confirmado")
+        return True
+    else:
+        print("acesso negado")
+        return False
+
+# Funcao3
+def saldo_bancario():
+    return conta[senha]
+
+def depositar_saldo():
+    valor_deposito = int(input("digite o valor a ser depositado: "))
+    conta[senha] += valor_deposito
+    print("depósito de ${valor_deposito} realizado com sucesso.")
+
+
+def retirar_saldo():
+    valor_saque = int(input("digite o valor a ser sacado: "))
+    if valor_saque <= conta[senha]:
+        conta[senha] -= valor_saque
+        print("saldo insuficiente.")
+
+def sair():
+    print("saindo da operação bancária")
+    exit()
+
+def operacao_bancaria():
+    if autenticar(senha):
+        while True:
+            print("1. verifique o seu saldo\m 2. Depositar dinheiro\n 3. Fazer saque\n 4. Sair\n")
+            
+            escolha_opcao = input("escolha alguma destas opçoes (1/2/3/4): ")
+
+            if escolha_opcao == '1':
+                print(f"seu saldo é: ${saldo_bancario()}")
+
+            elif escolha_opcao == '2':
+                depositar_saldo()
+
+            elif escolha_opcao == '3':
+                retirar_saldo()
+
+            elif escolha_opcao == '4':
+                sair()
+                break
+            else:
+                print("esta opcao nao tem na lista")
